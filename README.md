@@ -2,7 +2,7 @@
 
 借入残高・金利・残年数を入力するだけで、繰り上げ返済の節約効果をグラフで即可視化するウェブアプリ。
 
-**デプロイURL**: https://loan-calc-agapan611s-projects.vercel.app
+**デプロイURL**: https://loan-calc-sigma.vercel.app
 **GitHubリポジトリ**: https://github.com/agapan611/loan-calc
 
 ---
