@@ -1,73 +1,43 @@
-# React + TypeScript + Vite
+# LoanCalc — 住宅ローン繰り上げ返済シミュレーター
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+借入残高・金利・残年数を入力するだけで、繰り上げ返済の節約効果をグラフで即可視化するウェブアプリ。
 
-Currently, two official plugins are available:
+**デプロイURL**: https://loan-calc-agapan611s-projects.vercel.app
+**GitHubリポジトリ**: https://github.com/agapan611/loan-calc
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 主な機能
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **繰り上げ返済シミュレーター** — 節約できる金利・短縮できる期間を即計算
+- **残債推移グラフ** — 繰り上げあり/なしをグラフで比較（Recharts）
+- **複数パターン比較** — 50万・100万・200万・300万・500万で一覧比較
+- **借り換えアフィリエイト導線** — 結果後に自然な形でリンク設置
+- **FAQ・解説コンテンツ** — SEO対策済み
 
-## Expanding the ESLint configuration
+## 技術スタック
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| 項目 | 技術 |
+|---|---|
+| フロントエンド | React + TypeScript + Vite |
+| スタイリング | Tailwind CSS |
+| グラフ | Recharts |
+| デプロイ | Vercel（無料枠） |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 使い方
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. 借入残高・金利・残年数・繰り上げ額を入力
+2. 「期間短縮型」または「返済額減額型」を選択
+3. 「計算する」ボタンをクリック
+4. 節約効果・グラフ・複数パターン比較を確認
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ローカル起動
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+> 計算結果はあくまで参考値です。正確な返済額は各金融機関にご確認ください。
