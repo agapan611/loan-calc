@@ -24,6 +24,18 @@ export default function InputForm({ onCalculate }: InputFormProps) {
       setError('すべての項目に正しい数値を入力してください');
       return;
     }
+    if (b > 99999) {
+      setError('借入残高は99,999万円以下で入力してください');
+      return;
+    }
+    if (r > 20) {
+      setError('金利は20%以下で入力してください');
+      return;
+    }
+    if (y > 50) {
+      setError('返済年数は50年以下で入力してください');
+      return;
+    }
     if (p >= b) {
       setError('繰り上げ返済額は借入残高より小さくしてください');
       return;

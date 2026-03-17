@@ -34,7 +34,9 @@ export interface LoanResult {
 
 function calcMonthlyPayment(principal: number, monthlyRate: number, months: number): number {
   if (monthlyRate === 0) return principal / months;
-  return (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+  const pow = Math.pow(1 + monthlyRate, months);
+  if (!isFinite(pow) || pow === 1) return principal / months;
+  return (principal * monthlyRate * pow) / (pow - 1);
 }
 
 function generateBalanceHistory(
@@ -84,9 +86,12 @@ export function calculate(input: LoanInput): LoanResult {
     if (monthlyRate === 0) {
       withTotalMonths = Math.ceil(newPrincipal / withMonthlyPayment);
     } else {
-      withTotalMonths = Math.ceil(
-        -Math.log(1 - (newPrincipal * monthlyRate) / withMonthlyPayment) / Math.log(1 + monthlyRate)
-      );
+      const logArg = 1 - (newPrincipal * monthlyRate) / withMonthlyPayment;
+      if (logArg <= 0 || !isFinite(logArg)) {
+        withTotalMonths = totalMonths;
+      } else {
+        withTotalMonths = Math.ceil(-Math.log(logArg) / Math.log(1 + monthlyRate));
+      }
     }
     withTotalPayment = withMonthlyPayment * withTotalMonths + prepaymentYen;
   } else {
